@@ -1,3 +1,4 @@
+" honestly i have no idea of what does this code do 
 let &t_ut=''
 
 if exists('+termguicolors')
@@ -5,38 +6,62 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-set nocompatible
 
-syntax enable
 filetype plugin on
 
+" plugins {{{
 call plug#begin()
 
-" Plug 'morhetz/gruvbox'
-" Plug 'dracula/vim'
+Plug 'jbgutierrez/vim-better-comments'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'ycm-core/YouCompleteMe'
+Plug 'preservim/nerdtree'
+Plug 'ap/vim-css-color'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 call plug#end()
+"}}}
 
+" set colors scheme {{{
 set t_Co=256
-" set cursorline
 colorscheme onehalfdark
+"}}}
 
-" autocmd vimenter * ++nested colorscheme onehalfdark
+" nerdtree {{{
+autocmd VimEnter * NERDTree | wincmd p
+nmap <C-f> :NERDTreeToggle<CR>
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"}}}
 
-set background=dark
+"! not working
+" set better comments plugin colors {{{
+let g:ErrorBetterComments='#dc143c'
+let g:HighlightBetterComments='#9acd32'
+let g:QuestionBetterComments='#1e90ff'
+" StrikeoutBetterComments
+let g:TodoBetterComments='#ff8c00'
+"}}}
 
+" some minor settings {{{
+" set cool row numbers
 set number
 set relativenumber
-" Highlight cursor line underneath the cursor horizontally.
-set cursorline
 
-" Highlight cursor line underneath the cursor vertically.
+" disable vi compatibility
+set nocompatible
+
+" light up cursor column and row 
+set cursorline
 set cursorcolumn
 
+" some fold settings 
+set foldmethod=marker
+set foldnestmax=3
+
+" even minor changes
 set hlsearch
 set showmatch
 set tabstop=3
@@ -45,13 +70,12 @@ set wrap
 set ruler
 set laststatus=2
 set noerrorbells
-set foldmethod=marker
-set foldnestmax=3
 set backspace=indent,eol,start
 set confirm
 set history=1000
-"set nofoldenable
 set showcmd
+syntax enable
+"}}}
 
 set path+=**
 
@@ -62,7 +86,7 @@ set wildmenu
 au BufWinLeave * mkview
 au BufWinEnter * silent! loadview
 
-"+----------------------------------------------------------+
+" +----------------------------------------------------------+
 " FILE BROWSING:
 
 " Tweaks for browsing
@@ -77,7 +101,7 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " - :edit a folder to open a file browser
 " - <CR>/v/t to open in an h-split/v-split/tab
 " - check |netrw-browse-maps| for more mappings
-"+----------------------------------------------------------+
+" +----------------------------------------------------------+
 " TAG JUMPING:
 
 " Create the `tags` file (may need to install ctags first)
@@ -90,7 +114,7 @@ command! MakeTags !ctags -R .
 
 " THINGS TO CONSIDER:
 " - This doesn't help if you want a visual list of tags"
-"+----------------------------------------------------------+
+" +----------------------------------------------------------+
 " AUTOCOMPLETE:
 
 " The good stuff is documented in |ins-completion|
@@ -103,4 +127,4 @@ command! MakeTags !ctags -R .
 
 " NOW WE CAN:
 " - Use ^n and ^p to go back and forth in the suggestion list
-"   "+----------------------------------------------------------+
+" +----------------------------------------------------------+

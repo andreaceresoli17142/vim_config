@@ -125,12 +125,30 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 65 - ((16 * winheight(0) + 33) / 67)
+3
+normal! zc
+40
+normal! zc
+59
+normal! zc
+84
+normal! zc
+102
+normal! zc
+216
+normal! zc
+238
+normal! zc
+262
+normal! zc
+282
+normal! zc
+let s:l = 307 - ((286 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 65
-normal! 04|
+keepjumps 307
+normal! 021|
 lcd ~
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch

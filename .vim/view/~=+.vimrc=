@@ -137,11 +137,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 27 - ((26 * winheight(0) + 33) / 67)
+let s:l = 92 - ((85 * winheight(0) + 33) / 67)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 27
+keepjumps 92
 normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
